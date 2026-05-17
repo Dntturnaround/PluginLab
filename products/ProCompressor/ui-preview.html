@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Pro Compressor UI Preview</title>
+<style>
+  body{margin:0;background:#07080a;display:flex;align-items:center;justify-content:center;height:100vh;font-family:Inter,Arial,sans-serif;color:#f2f2f2}
+  .plugin{width:760px;height:320px;background:#101216;border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.65), inset 0 0 0 1px #252a33;position:relative;overflow:hidden}
+  .bar{height:86px;padding:18px 24px;box-sizing:border-box;background:linear-gradient(180deg,#151922,#101216)}
+  h1{margin:0;font-size:26px;letter-spacing:.3px}.sub{color:#7f8794;font-size:14px;margin-top:6px}.bypass{position:absolute;right:30px;top:26px;border:1px solid #3a4150;border-radius:8px;padding:9px 19px;color:#dfe5ee;background:#1a1f28;font-size:14px}.controls{display:flex;gap:10px;padding:0 24px}.slot{width:112px;text-align:center}.label{height:22px;color:#e8ecf1;font-size:14px}.knob{width:104px;height:104px;margin:13px auto 8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#414a5b,#1b2029 58%,#090b0e 100%);border:1px solid #394250;box-shadow:inset 0 6px 18px rgba(255,255,255,.05),inset 0 -10px 18px rgba(0,0,0,.55),0 8px 20px rgba(0,0,0,.45);position:relative}.knob:after{content:"";position:absolute;left:50%;top:12px;width:3px;height:28px;background:#8ec5ff;border-radius:4px;transform:translateX(-50%) rotate(35deg);transform-origin:50% 40px}.value{display:inline-block;min-width:82px;padding:4px 0;border-radius:5px;background:#0b0d11;border:1px solid #262c36;color:#cbd3df;font-size:12px}.footer{position:absolute;left:24px;right:24px;bottom:16px;height:1px;background:linear-gradient(90deg,transparent,#303744,transparent)}
+</style>
+</head><body><div class="plugin"><div class="bar"><h1>Pro Compressor</h1><div class="sub">Clean compression foundation: input, threshold, ratio, timing, output</div><div class="bypass">Bypass</div></div><div class="controls">
+<div class="slot"><div class="label">Input</div><div class="knob"></div><div class="value">0.0 dB</div></div>
+<div class="slot"><div class="label">Threshold</div><div class="knob"></div><div class="value">-18 dB</div></div>
+<div class="slot"><div class="label">Ratio</div><div class="knob"></div><div class="value">4.0:1</div></div>
+<div class="slot"><div class="label">Attack</div><div class="knob"></div><div class="value">10 ms</div></div>
+<div class="slot"><div class="label">Release</div><div class="knob"></div><div class="value">100 ms</div></div>
+<div class="slot"><div class="label">Output</div><div class="knob"></div><div class="value">0.0 dB</div></div>
+</div><div class="footer"></div></div></body></html>

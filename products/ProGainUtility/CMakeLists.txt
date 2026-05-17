@@ -1,0 +1,45 @@
+cmake_minimum_required(VERSION 3.22)
+
+# Professional JUCE Plugin Lab template.
+# Copy this folder into /home/edward/PluginLab/products/<ProductName>
+# then rename the project/target/product fields below.
+
+project(ProGainUtility VERSION 0.1.0)
+
+set(JUCE_PATH "/home/edward/PluginLab/JUCE" CACHE PATH "Path to local JUCE checkout")
+add_subdirectory(${JUCE_PATH} JUCE)
+
+juce_add_plugin(ProGainUtility
+    COMPANY_NAME "PluginLab"
+    IS_SYNTH FALSE
+    NEEDS_MIDI_INPUT FALSE
+    NEEDS_MIDI_OUTPUT FALSE
+    IS_MIDI_EFFECT FALSE
+    EDITOR_WANTS_KEYBOARD_FOCUS FALSE
+    COPY_PLUGIN_AFTER_BUILD FALSE
+    PLUGIN_MANUFACTURER_CODE PlLb
+    PLUGIN_CODE Pgu1
+    FORMATS VST3 Standalone
+    PRODUCT_NAME "Pro Gain Utility")
+
+target_sources(ProGainUtility
+    PRIVATE
+        Source/PluginProcessor.cpp
+        Source/PluginEditor.cpp)
+
+target_compile_features(ProGainUtility PRIVATE cxx_std_17)
+
+target_compile_definitions(ProGainUtility
+    PUBLIC
+        JUCE_WEB_BROWSER=0
+        JUCE_USE_CURL=0
+        JUCE_VST3_CAN_REPLACE_VST2=0)
+
+target_link_libraries(ProGainUtility
+    PRIVATE
+        juce::juce_audio_utils
+        juce::juce_dsp
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_lto_flags
+        juce::juce_recommended_warning_flags)

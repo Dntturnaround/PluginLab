@@ -35,6 +35,10 @@ git submodule update --init --recursive
 build_dir="$product_dir/build/mac"
 configure_args=(-S "$product_dir" -B "$build_dir")
 
+if [[ "$(uname -m)" == "arm64" ]]; then
+    configure_args+=("-DCMAKE_OSX_ARCHITECTURES=arm64;x86_64")
+fi
+
 if command -v ninja >/dev/null 2>&1; then
     generator="Ninja"
 elif command -v xcodebuild >/dev/null 2>&1 && xcodebuild -version 2>/dev/null | grep -q '^Xcode '; then
@@ -66,6 +70,9 @@ copy_bundle() {
     else
         cp -R "$src" "$dest_dir/"
     fi
+
+    xattr -cr "$dest" 2>/dev/null || true
+    codesign --force --deep --sign - "$dest" >/dev/null
 }
 
 vst3_count=0
@@ -80,13 +87,17 @@ if [[ $vst3_count -eq 0 ]]; then
 fi
 
 component_count=0
-while IFS= read -r -d '' bundle; do
-    copy_bundle "$bundle" "$component_dest"
-    component_count=$((component_count + 1))
-done < <(find "$build_dir" -type d -name "*.component" -print0)
+if [[ "${INSTALL_AU:-0}" == "1" ]]; then
+    while IFS= read -r -d '' bundle; do
+        copy_bundle "$bundle" "$component_dest"
+        component_count=$((component_count + 1))
+    done < <(find "$build_dir" -type d -name "*.component" -print0)
 
-if [[ $component_count -eq 0 ]]; then
-    echo "Warning: no .component bundle found under $build_dir"
+    if [[ $component_count -eq 0 ]]; then
+        echo "Warning: no .component bundle found under $build_dir"
+    fi
+else
+    echo "Skipping AU install by default. Set INSTALL_AU=1 to install .component bundles."
 fi
 
 echo

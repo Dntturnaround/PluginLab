@@ -3,8 +3,6 @@
 ProCompressorAudioProcessorEditor::ProCompressorAudioProcessorEditor (ProCompressorAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
-    setSize (760, 320);
-
     setupSlider (inputSlider, "Input", " dB");
     setupSlider (thresholdSlider, "Threshold", " dB");
     setupSlider (ratioSlider, "Ratio", ":1");
@@ -23,6 +21,8 @@ ProCompressorAudioProcessorEditor::ProCompressorAudioProcessorEditor (ProCompres
     releaseAttachment = std::make_unique<SliderAttachment> (state, "release", releaseSlider);
     outputAttachment = std::make_unique<SliderAttachment> (state, "outputGain", outputSlider);
     bypassAttachment = std::make_unique<ButtonAttachment> (state, "bypass", bypassButton);
+
+    setSize (760, 320);
 }
 
 void ProCompressorAudioProcessorEditor::setupSlider (juce::Slider& slider, const juce::String& labelText, const juce::String& suffix)

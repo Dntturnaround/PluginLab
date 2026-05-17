@@ -35,10 +35,10 @@ git submodule update --init --recursive
 build_dir="$product_dir/build/mac"
 configure_args=(-S "$product_dir" -B "$build_dir")
 
-if command -v xcodebuild >/dev/null 2>&1; then
-    generator="Xcode"
-elif command -v ninja >/dev/null 2>&1; then
+if command -v ninja >/dev/null 2>&1; then
     generator="Ninja"
+elif command -v xcodebuild >/dev/null 2>&1 && xcodebuild -version 2>/dev/null | grep -q '^Xcode '; then
+    generator="Xcode"
 else
     generator="Unix Makefiles"
 fi

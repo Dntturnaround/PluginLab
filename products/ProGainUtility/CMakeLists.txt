@@ -1,13 +1,17 @@
 cmake_minimum_required(VERSION 3.22)
 
 # Professional JUCE Plugin Lab template.
-# Copy this folder into /home/edward/PluginLab/products/<ProductName>
-# then rename the project/target/product fields below.
+# Copy this folder into products/<ProductName> then rename the project/target/product fields below.
 
 project(ProGainUtility VERSION 0.1.0)
 
-set(JUCE_PATH "/home/edward/PluginLab/JUCE" CACHE PATH "Path to local JUCE checkout")
-add_subdirectory(${JUCE_PATH} JUCE)
+set(JUCE_PATH "${CMAKE_CURRENT_LIST_DIR}/../../JUCE" CACHE PATH "Path to local JUCE checkout")
+add_subdirectory("${JUCE_PATH}" JUCE)
+
+set(PLUGIN_FORMATS VST3 Standalone)
+if(APPLE)
+    list(APPEND PLUGIN_FORMATS AU)
+endif()
 
 juce_add_plugin(ProGainUtility
     COMPANY_NAME "PluginLab"
@@ -19,7 +23,7 @@ juce_add_plugin(ProGainUtility
     COPY_PLUGIN_AFTER_BUILD FALSE
     PLUGIN_MANUFACTURER_CODE PlLb
     PLUGIN_CODE Pgu1
-    FORMATS VST3 Standalone
+    FORMATS ${PLUGIN_FORMATS}
     PRODUCT_NAME "Pro Gain Utility")
 
 target_sources(ProGainUtility

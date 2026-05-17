@@ -6,11 +6,17 @@ out/
 
 # Plugin binaries / bundles
 *.vst3
+*.vst3/
 *.component
+*.component/
 *.app
+*.app/
 *.aaxplugin
+*.aaxplugin/
 *.clap
+*.clap/
 *.lv2
+*.lv2/
 
 # CMake / compile artifacts
 CMakeCache.txt
